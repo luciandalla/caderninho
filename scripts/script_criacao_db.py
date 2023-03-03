@@ -52,8 +52,8 @@ for tabela_nome in TABLES:
 
 cliente_sql = 'INSERT INTO clientes (nome, telefone, email) VALUES (%s, %s, %s)'
 clientes = [
-    ("Lucian Maciel", "51999998888", "lucian2874547@gmail.com"),
-    ("Barbara Becker", "51999997777", "barbara2874547@gmail.com"),
+    ("LUCIAN MACIEL", "51994652141", "LUCIAN@GMAIL.COM"),
+    ("BARBARA BECKER", "51958744741", "BARBARA_B@HOTMAIL.COM"),
 ]
 cursor.executemany(cliente_sql, clientes)
 
