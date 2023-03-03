@@ -1,18 +1,20 @@
 <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Telefone</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cliente in clientes %}
-                <tr>
-                    <td>{{ cliente.nome }}</td>
-                    <td>{{ cliente.telefone }}</td>
-                    <td>{{ cliente.email }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.telefone }}</td>
+                <td>{{ cliente.email }}</td>
+                <td><a href="{{ url_for('cliente_detalhes', id=cliente.id) }}">Detalhar</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>

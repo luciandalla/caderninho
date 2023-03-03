@@ -13,3 +13,8 @@ class Clientes(db.Model):
     def lista_clientes():
         clientes = Clientes.query.order_by(Clientes.nome)
         return clientes
+
+    @staticmethod
+    def detalha_cliente(id):
+        cliente = Clientes.query.filter_by(id=id).first()
+        return cliente

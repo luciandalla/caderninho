@@ -50,12 +50,12 @@ for tabela_nome in TABLES:
 
 # DADOS INICIAIS
 
-usuario_sql = 'INSERT INTO clientes (nome, telefone, email) VALUES (%s, %s, %s)'
-usuarios = [
+cliente_sql = 'INSERT INTO clientes (nome, telefone, email) VALUES (%s, %s, %s)'
+clientes = [
     ("Lucian Maciel", "51999998888", "lucian2874547@gmail.com"),
     ("Barbara Becker", "51999997777", "barbara2874547@gmail.com"),
 ]
-cursor.executemany(usuario_sql, usuarios)
+cursor.executemany(cliente_sql, clientes)
 
 conn.commit()
 cursor.close()
