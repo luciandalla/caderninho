@@ -1,10 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from flask_app import app
-from models import *
-
-@app.route('/')
-def home():
-    return render_template('home.html')
+from models.clientes import *
 
 @app.route('/clientes')
 def clientes():
@@ -26,4 +22,24 @@ def cliente_cadastrar():
     telefone = request.form['telefone']
     email = request.form['email']
     Clientes.cadastra_cliente(nome, telefone, email)
+    return redirect(url_for('clientes'))
+
+@app.route('/cliente-editar/<int:id>')
+def cliente_editar(id):
+    cliente = Clientes.busca_cliente(id)
+    return render_template('cliente-editar.html', cliente=cliente)
+
+@app.route('/cliente-atualizacao/', methods=['POST',])
+def cliente_atualizacao():
+    id = request.form['id']
+    nome = request.form['nome']
+    telefone = request.form['telefone']
+    email = request.form['email']
+    Clientes.alterar_cliente(id, nome, telefone, email)
+    cliente = Clientes.busca_cliente(id)
+    return render_template('cliente-detalhes.html', cliente = cliente)
+
+@app.route('/cliente-excluir/<int:id>')
+def cliente_excluir(id):
+    Clientes.excluir_cliente(id)
     return redirect(url_for('clientes'))

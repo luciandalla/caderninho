@@ -1,0 +1,16 @@
+
+<form action="{{ url_for('cliente_atualizacao') }}" method="post">
+
+    <input type="hidden" name="id" value="{{ cliente.id }}">
+    <label class="texto" for="nome">Nome: </label>
+    <input type="text" id="nome" name="nome" value="{{ cliente.nome }}">
+
+    <label class="texto" for="telefone">Telefone: </label>
+    <input type="text" id="telefone" name="telefone" value="{{ cliente.telefone }}">
+
+    <label class="texto" for="email">E-mail: </label>
+    <input type="text" id="email" name="email" value="{{ cliente.email }}">
+
+    <button type="submit">Atualizar</button>
+    <a href="/clientes">Cancelar</a>
+</form>
