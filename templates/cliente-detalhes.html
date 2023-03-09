@@ -9,7 +9,25 @@
     <li>E-mail: {{ cliente.email }}</li>
 </ul>
 
-<h3>Compras realizadas:</h3>
+<h3>Lançamentos realizados:</h3>
+<table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lancamento in lancamentos %}
+            <tr>
+                <td>{{ lancamento.data }}</td>
+                <td>{{ lancamento.valor }}</td>
+                <td>{{ lancamento.observacao }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
 
 <h3>Pagamentos realizadas:</h3>
 

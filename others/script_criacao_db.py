@@ -35,6 +35,17 @@ TABLES['Clientes'] = ('''
       PRIMARY KEY (`id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
+TABLES['Lancamentos'] = ('''
+      CREATE TABLE `lancamentos` (
+      `id` int(8) NOT NULL AUTO_INCREMENT,
+      `data` date NOT NULL,
+      `valor` float NOT NULL,
+      `observacao` varchar(100) NOT NULL,
+      `id_cliente` integer NOT NULL,
+      PRIMARY KEY (`id`),
+      CONSTRAINT fk_UserLancamento FOREIGN KEY (id_cliente) REFERENCES Clientes (id)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
 for tabela_nome in TABLES:
     tabela_sql = TABLES[tabela_nome]
     try:
@@ -52,10 +63,15 @@ for tabela_nome in TABLES:
 
 cliente_sql = 'INSERT INTO clientes (nome, telefone, email) VALUES (%s, %s, %s)'
 clientes = [
-    ("LUCIAN MACIEL", "51994652141", "LUCIAN@GMAIL.COM"),
-    ("BARBARA BECKER", "51958744741", "BARBARA_B@HOTMAIL.COM"),
+    ("LUCIAN MACIEL", "51994652141", "LUCIAN@GMAIL.COM")
 ]
 cursor.executemany(cliente_sql, clientes)
+
+lancamento_sql = 'INSERT INTO lancamentos (data, valor, observacao, id_cliente) VALUES (%s, %s, %s, %s)'
+lancamentos = [
+    ("2023-03-09", "250", "Compra de relógio de pulso", "1")
+]
+cursor.executemany(lancamento_sql, lancamentos)
 
 conn.commit()
 cursor.close()
