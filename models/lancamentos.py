@@ -19,3 +19,10 @@ class Lancamentos(db.Model):
     def busca_lancamentos(cliente_id):
         lancamentos = Lancamentos.query.filter_by(id_cliente=cliente_id).order_by(Lancamentos.data)
         return lancamentos
+
+    @staticmethod
+    def cadastra_lancamento(data, valor, observacao, cliente_id):
+        lancamento = Lancamentos(data=data, valor=valor, observacao=observacao, id_cliente=cliente_id)
+        db.session.add(lancamento)
+        db.session.commit()
+        return 'Lançamento cadastrado com sucesso!'

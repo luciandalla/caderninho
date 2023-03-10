@@ -6,6 +6,7 @@ app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 
 from views.cliente import *
+from views.lancamento import *
 from views.gerais import *
 
 if __name__ == '__main__':

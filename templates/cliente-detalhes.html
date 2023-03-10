@@ -10,12 +10,14 @@
 </ul>
 
 <h3>Lançamentos realizados:</h3>
+<a href="{{ url_for('lancamento_novo', id=cliente.id) }}">Novo Lançamento</a>
 <table>
         <thead>
             <tr>
                 <th>Data</th>
                 <th>Valor</th>
                 <th>Observação</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +26,7 @@
                 <td>{{ lancamento.data }}</td>
                 <td>{{ lancamento.valor }}</td>
                 <td>{{ lancamento.observacao }}</td>
+                <td></td>
             </tr>
         {% endfor %}
         </tbody>

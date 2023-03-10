@@ -38,8 +38,7 @@ def cliente_atualizacao():
     telefone = request.form['telefone']
     email = request.form['email']
     Clientes.alterar_cliente(id, nome, telefone, email)
-    cliente = Clientes.busca_cliente(id)
-    return render_template('cliente-detalhes.html', cliente = cliente)
+    return redirect(url_for('cliente_detalhes', id=id))
 
 @app.route('/cliente-excluir/<int:id>')
 def cliente_excluir(id):
