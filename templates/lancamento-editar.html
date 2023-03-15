@@ -1,0 +1,19 @@
+
+<form action="{{ url_for('lancamento_atualizacao') }}" method="post">
+
+    <h3>{{ lancamento.clientes.nome }}</h3>
+    <input type="hidden" name="id" value="{{ lancamento.id }}">
+    <input type="hidden" name="cliente_id" value="{{ lancamento.id_cliente }}">
+
+    <label class="texto" for="data">Data do Lançamento: </label>
+    <input type="date" id="data" name="data" value="{{ lancamento.data }}">
+
+    <label class="texto" for="valor">Valor: </label>
+    <input type="number" step=".01" min="0.01" id="valor" name="valor" value="{{ lancamento.valor }}">
+
+    <label class="texto" for="observacao">Descrição: </label>
+    <input type="text" id="observacao" name="observacao" value="{{ lancamento.observacao }}">
+
+    <button type="submit">Cadastrar</button>
+    <a href="{{ url_for('cliente_detalhes', id=lancamento.id_cliente) }}">Voltar</a>
+</form>

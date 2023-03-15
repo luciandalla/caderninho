@@ -62,6 +62,10 @@ class Clientes(db.Model):
 
     @staticmethod
     def excluir_cliente(id):
-            Clientes.query.filter_by(id=id).delete()
-            db.session.commit()
-            return "Cliente deletado com sucesso!"
+            try:
+                Clientes.query.filter_by(id=id).delete()
+                db.session.commit()
+                return "Cliente deletado com sucesso!"
+            except:
+                return "Não foi possível deletar. Cliente possui lançamentos vinculados!"
+

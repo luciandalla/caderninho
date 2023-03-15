@@ -17,3 +17,23 @@ def lancamento_cadastrar():
     Lancamentos.cadastra_lancamento(data, valor, observacao, cliente_id)
     return redirect(url_for('cliente_detalhes', id=cliente_id))
 
+@app.route('/lancamento-editar/<int:id>')
+def lancamento_editar(id):
+    lancamento = Lancamentos.busca_lancamento(id)
+    return render_template('lancamento-editar.html', lancamento=lancamento)
+
+@app.route('/lancamento-atualizacao/', methods=['POST',])
+def lancamento_atualizacao():
+    id = request.form['id']
+    data = request.form['data']
+    valor = request.form['valor']
+    observacao = request.form['observacao']
+    cliente_id = request.form['cliente_id']
+    Lancamentos.altera_lancamento(id, data, valor, observacao, cliente_id)
+    return redirect(url_for('cliente_detalhes', id=cliente_id))
+
+@app.route('/lancamento-excluir/<int:id>')
+def lancamento_excluir(id):
+    lancamento = Lancamentos.busca_lancamento(id)
+    Lancamentos.excluir_lancamento(id)
+    return redirect(url_for('cliente_detalhes', id=lancamento.id_cliente))

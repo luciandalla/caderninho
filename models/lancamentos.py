@@ -16,6 +16,11 @@ class Lancamentos(db.Model):
         return '<Name %r>' % self.name
 
     @staticmethod
+    def busca_lancamento(id):
+        lancamento = Lancamentos.query.filter_by(id=id).first()
+        return lancamento
+
+    @staticmethod
     def busca_lancamentos(cliente_id):
         lancamentos = Lancamentos.query.filter_by(id_cliente=cliente_id).order_by(Lancamentos.data)
         return lancamentos
@@ -26,3 +31,21 @@ class Lancamentos(db.Model):
         db.session.add(lancamento)
         db.session.commit()
         return 'Lançamento cadastrado com sucesso!'
+
+    @staticmethod
+    def altera_lancamento(id, data, valor, observacao, cliente_id):
+        lancamento = Lancamentos.busca_lancamento(id)
+        lancamento.data = data
+        lancamento.valor = valor
+        lancamento.observacao = observacao
+        lancamento.id_cliente = cliente_id
+        db.session.add(lancamento)
+        db.session.commit()
+        mensagem = f"Lançamento foi alterado com sucesso!"
+        return mensagem
+
+    @staticmethod
+    def excluir_lancamento(id):
+            Lancamentos.query.filter_by(id=id).delete()
+            db.session.commit()
+            return "Lancamento deletado com sucesso!"
