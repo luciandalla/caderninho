@@ -8,7 +8,7 @@ class Lancamentos(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     data = db.Column(db.Date, nullable=False)
     valor = db.Column(db.Float, nullable=False)
-    observacao = db.Column(db.String(100), nullable=False)
+    observacao = db.Column(db.String(100))
     id_cliente = db.Column(db.Integer, ForeignKey('clientes.id'))
     clientes = relationship(Clientes)
 

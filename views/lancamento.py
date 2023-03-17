@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for
 from flask_app import app
-from models.clientes import *
 from models.lancamentos import *
 
 @app.route('/lancamento-novo/<int:id>')

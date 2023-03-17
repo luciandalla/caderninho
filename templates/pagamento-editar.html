@@ -1,0 +1,19 @@
+
+<form action="{{ url_for('pagamento_atualizacao') }}" method="post">
+
+    <h3>{{ pagamento.clientes.nome }}</h3>
+    <input type="hidden" name="id" value="{{ pagamento.id }}">
+    <input type="hidden" name="cliente_id" value="{{ pagamento.id_cliente }}">
+
+    <label class="texto" for="data">Data do Pagamento: </label>
+    <input type="date" id="data" name="data" value="{{ pagamento.data }}">
+
+    <label class="texto" for="valor">Valor: </label>
+    <input type="number" step=".01" min="0.01" id="valor" name="valor" value="{{ pagamento.valor }}">
+
+    <label class="texto" for="observacao">Descrição: </label>
+    <input type="text" id="observacao" name="observacao" value="{{ pagamento.observacao }}">
+
+    <button type="submit">Cadastrar</button>
+    <a href="{{ url_for('cliente_detalhes', id=pagamento.id_cliente) }}">Voltar</a>
+</form>

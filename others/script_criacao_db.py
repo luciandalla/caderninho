@@ -40,10 +40,21 @@ TABLES['Lancamentos'] = ('''
       `id` int(8) NOT NULL AUTO_INCREMENT,
       `data` date NOT NULL,
       `valor` float NOT NULL,
-      `observacao` varchar(100) NOT NULL,
+      `observacao` varchar(100),
       `id_cliente` integer NOT NULL,
       PRIMARY KEY (`id`),
       CONSTRAINT fk_UserLancamento FOREIGN KEY (id_cliente) REFERENCES Clientes (id)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
+TABLES['Pagamentos'] = ('''
+      CREATE TABLE `pagamentos` (
+      `id` int(8) NOT NULL AUTO_INCREMENT,
+      `data` date NOT NULL,
+      `valor` float NOT NULL,
+      `observacao` varchar(100),
+      `id_cliente` integer NOT NULL,
+      PRIMARY KEY (`id`),
+      CONSTRAINT fk_UserPagamento FOREIGN KEY (id_cliente) REFERENCES Clientes (id)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
 for tabela_nome in TABLES:
@@ -72,6 +83,12 @@ lancamentos = [
     ("2023-03-09", "250", "Compra de relógio de pulso", "1")
 ]
 cursor.executemany(lancamento_sql, lancamentos)
+
+pagamento_sql = 'INSERT INTO pagamentos (data, valor, observacao, id_cliente) VALUES (%s, %s, %s, %s)'
+pagamentos = [
+    ("2023-03-12", "150", "Pagamento via Pix", "1")
+]
+cursor.executemany(pagamento_sql, pagamentos)
 
 conn.commit()
 cursor.close()

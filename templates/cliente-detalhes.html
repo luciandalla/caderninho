@@ -3,14 +3,14 @@
 <a href="{{ url_for('cliente_editar', id=cliente.id) }}">Editar</a>
 <a href="{{ url_for('cliente_excluir', id=cliente.id) }}">Excluir</a>
 
-<h3>Informações de contato:</h3>
+<h3>Informações de contato</h3>
 <ul>
     <li>Telefone: {{ cliente.telefone }}</li>
     <li>E-mail: {{ cliente.email }}</li>
 </ul>
 
-<h3>Lançamentos realizados:</h3>
-
+<h3>Lançamentos</h3>
+<a href="{{ url_for('lancamento_novo', id=cliente.id) }}">Incluir lançamento</a>
 <table>
         <thead>
             <tr>
@@ -33,7 +33,28 @@
         </tbody>
 </table>
 
-<h3>Pagamentos realizadas:</h3>
-
+<h3>Pagamentos</h3>
+<a href="{{ url_for('pagamento_novo', id=cliente.id) }}">Incluir pagamento</a>
+<table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Observação</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pagamento in pagamentos %}
+            <tr>
+                <td>{{ pagamento.data }}</td>
+                <td>{{ pagamento.valor }}</td>
+                <td>{{ pagamento.observacao }}</td>
+                <td><a href="{{ url_for('pagamento_editar', id=pagamento.id) }}">Editar</a>
+                <a href="{{ url_for('pagamento_excluir', id=pagamento.id) }}">Excluir</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
 
 <a href="/clientes">Voltar</a>

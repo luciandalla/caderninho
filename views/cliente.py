@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for
 from flask_app import app
 from models.clientes import *
 from models.lancamentos import *
+from models.pagamentos import *
 
 @app.route('/clientes')
 def clientes():
@@ -12,7 +13,8 @@ def clientes():
 def cliente_detalhes(id):
     cliente = Clientes.busca_cliente(id)
     lancamentos = Lancamentos.busca_lancamentos(id)
-    return render_template('cliente-detalhes.html', cliente = cliente, lancamentos=lancamentos)
+    pagamentos = Pagamentos.busca_pagamentos(id)
+    return render_template('cliente-detalhes.html', cliente = cliente, lancamentos=lancamentos, pagamentos=pagamentos)
 
 @app.route('/cliente-novo')
 def cliente_novo():

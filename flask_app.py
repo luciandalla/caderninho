@@ -7,6 +7,7 @@ db = SQLAlchemy(app)
 
 from views.cliente import *
 from views.lancamento import *
+from views.pagamento import *
 from views.gerais import *
 
 if __name__ == '__main__':
