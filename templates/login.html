@@ -1,0 +1,15 @@
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul id="messages" class="list-unstyled">
+                {% for message in messages %}
+                    <li class="alert alert-success">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login_autenticar') }}">
+            <p><label class="texto">Usuário</label> <input class="form-control" type="text" name="usuario" required></p>
+            <p><label class="texto">Senha</label> <input class="form-control" type="password" name="senha" required></p>
+            <p><button class="btn btn-success" type="submit">Entrar</button></p>
+        </form>

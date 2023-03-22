@@ -26,6 +26,13 @@ TABLES = {}
 
 # TABELAS
 
+TABLES['Usuarios'] = ('''
+      CREATE TABLE `usuarios` (
+      `usuario` varchar(8) NOT NULL,
+      `senha` varchar(100) NOT NULL,
+      PRIMARY KEY (`usuario`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
 TABLES['Clientes'] = ('''
       CREATE TABLE `clientes` (
       `id` int(8) NOT NULL AUTO_INCREMENT,
@@ -71,6 +78,12 @@ for tabela_nome in TABLES:
         print('OK')
 
 # DADOS INICIAIS
+
+usuario_sql = 'INSERT INTO usuarios (usuario, senha) VALUES (%s, %s)'
+usuarios = [
+      ("admin", "admin")
+]
+cursor.executemany(usuario_sql, usuarios)
 
 cliente_sql = 'INSERT INTO clientes (nome, telefone, email) VALUES (%s, %s, %s)'
 clientes = [
