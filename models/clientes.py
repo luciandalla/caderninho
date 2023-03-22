@@ -69,3 +69,4 @@ class Clientes(db.Model):
             except:
                 return "Não foi possível deletar. Cliente possui lançamentos vinculados!"
 
+

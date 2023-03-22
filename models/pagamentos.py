@@ -26,6 +26,11 @@ class Pagamentos(db.Model):
         return pagamentos
 
     @staticmethod
+    def busca_todos_pagamentos():
+        pagamentos = Pagamentos.query.order_by(Pagamentos.data)
+        return pagamentos
+
+    @staticmethod
     def cadastra_pagamento(data, valor, observacao, cliente_id):
         pagamento = Pagamentos(data=data, valor=valor, observacao=observacao, id_cliente=cliente_id)
         db.session.add(pagamento)
@@ -49,3 +54,19 @@ class Pagamentos(db.Model):
             Pagamentos.query.filter_by(id=id).delete()
             db.session.commit()
             return "Pagamento deletado com sucesso!"
+
+    @staticmethod
+    def soma_total_pagamentos():
+        total = 0
+        pagamentos = Pagamentos.busca_todos_pagamentos()
+        for pagamento in pagamentos:
+            total = total + pagamento.valor
+        return total
+
+    @staticmethod
+    def total_pagamentos_cliente(cliente_id):
+        pagamentos = Pagamentos.busca_pagamentos(cliente_id)
+        total = 0
+        for pagamento in pagamentos:
+            total = total + pagamento.valor
+        return total

@@ -1,6 +1,7 @@
 from flask_app import db
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 from models.clientes import Clientes
 
 
@@ -23,6 +24,11 @@ class Lancamentos(db.Model):
     @staticmethod
     def busca_lancamentos(cliente_id):
         lancamentos = Lancamentos.query.filter_by(id_cliente=cliente_id).order_by(Lancamentos.data)
+        return lancamentos
+
+    @staticmethod
+    def busca_todos_lancamentos():
+        lancamentos = Lancamentos.query.order_by(Lancamentos.data)
         return lancamentos
 
     @staticmethod
@@ -49,3 +55,19 @@ class Lancamentos(db.Model):
             Lancamentos.query.filter_by(id=id).delete()
             db.session.commit()
             return "Lancamento deletado com sucesso!"
+
+    @staticmethod
+    def soma_total_lancamentos():
+        total = 0
+        lancamentos = Lancamentos.busca_todos_lancamentos()
+        for lancamento in lancamentos:
+            total = total + lancamento.valor
+        return total
+
+    @staticmethod
+    def total_lancamentos_cliente(cliente_id):
+        lancamentos = Lancamentos.busca_lancamentos(cliente_id)
+        total = 0
+        for lancamento in lancamentos:
+            total = total + lancamento.valor
+        return total
