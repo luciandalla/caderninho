@@ -36,24 +36,31 @@ class Lancamentos(db.Model):
         lancamento = Lancamentos(data=data, valor=valor, observacao=observacao, id_cliente=cliente_id)
         db.session.add(lancamento)
         db.session.commit()
+        Clientes.atualiza_saldo(cliente_id, valor)
         return 'Lançamento cadastrado com sucesso!'
 
     @staticmethod
     def altera_lancamento(id, data, valor, observacao, cliente_id):
         lancamento = Lancamentos.busca_lancamento(id)
+        diferenca_valor = float(valor) - float(lancamento.valor)
         lancamento.data = data
         lancamento.valor = valor
         lancamento.observacao = observacao
         lancamento.id_cliente = cliente_id
         db.session.add(lancamento)
         db.session.commit()
+        Clientes.atualiza_saldo(cliente_id, diferenca_valor)
         mensagem = f"Lançamento foi alterado com sucesso!"
         return mensagem
 
     @staticmethod
     def excluir_lancamento(id):
+            lancamento = Lancamentos.busca_lancamento(id)
+            cliente_id = lancamento.id_cliente
+            valor = float(lancamento.valor) * -1
             Lancamentos.query.filter_by(id=id).delete()
             db.session.commit()
+            Clientes.atualiza_saldo(cliente_id, valor)
             return "Lancamento deletado com sucesso!"
 
     @staticmethod

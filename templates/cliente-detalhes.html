@@ -9,6 +9,8 @@
     <li>E-mail: {{ cliente.email }}</li>
 </ul>
 
+<p>Saldo Devedor do cliente: R$ {{  cliente.saldo }}</p>
+
 <h3>Lançamentos</h3>
 <a href="{{ url_for('lancamento_novo', id=cliente.id) }}">Incluir lançamento</a>
 <table>

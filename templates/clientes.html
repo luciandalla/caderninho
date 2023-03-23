@@ -8,16 +8,19 @@
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Email</th>
-                <th>Ações</th>
+                <th>Saldo Devedor</th>
+                <th>Incluir</th>
             </tr>
         </thead>
         <tbody>
         {% for cliente in clientes %}
             <tr>
-                <td>{{ cliente.nome }}</td>
+                <td><a href="{{ url_for('cliente_detalhes', id=cliente.id) }}">{{ cliente.nome }}</a></td>
                 <td>{{ cliente.telefone }}</td>
                 <td>{{ cliente.email }}</td>
-                <td><a href="{{ url_for('cliente_detalhes', id=cliente.id) }}">Detalhar</a></td>
+                <td>{{ cliente.saldo }}</td>
+                <td><a href="{{ url_for('lancamento_novo', id=cliente.id) }}">Lançamento</a>
+                <a href="{{ url_for('pagamento_novo', id=cliente.id) }}">Pagamento</a></td>
             </tr>
         {% endfor %}
         </tbody>

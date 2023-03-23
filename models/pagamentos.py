@@ -35,24 +35,32 @@ class Pagamentos(db.Model):
         pagamento = Pagamentos(data=data, valor=valor, observacao=observacao, id_cliente=cliente_id)
         db.session.add(pagamento)
         db.session.commit()
+        valor = float(valor) * -1
+        Clientes.atualiza_saldo(cliente_id, valor)
         return 'Pagamento cadastrado com sucesso!'
 
     @staticmethod
     def altera_pagamento(id, data, valor, observacao, cliente_id):
         pagamento = Pagamentos.busca_pagamento(id)
+        diferenca_valor = float(pagamento.valor) - float(valor)
         pagamento.data = data
         pagamento.valor = valor
         pagamento.observacao = observacao
         pagamento.id_cliente = cliente_id
         db.session.add(pagamento)
         db.session.commit()
+        Clientes.atualiza_saldo(cliente_id, diferenca_valor)
         mensagem = f"Pagamento foi alterado com sucesso!"
         return mensagem
 
     @staticmethod
     def excluir_pagamento(id):
+            pagamento = Pagamentos.busca_pagamento(id)
+            cliente_id = pagamento.id_cliente
+            valor = float(pagamento.valor)
             Pagamentos.query.filter_by(id=id).delete()
             db.session.commit()
+            Clientes.atualiza_saldo(cliente_id, valor)
             return "Pagamento deletado com sucesso!"
 
     @staticmethod

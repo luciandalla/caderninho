@@ -8,10 +8,27 @@
 <h3>Total a receber:</h3>
 <p>{{ valores_a_receber }}</p>
 
-
 <h3>Principais Devedores:</h3>
+<table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Saldo Devedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for devedor in devedores%}
+            <tr>
+                <td>{{ devedor.nome }}</td>
+                <td>{{ devedor.saldo }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
 
-<h3>Principais Pagadores:</h3>
+
+
+
 
 <h3>Clientes inadimplentes:</h3>
 

@@ -39,6 +39,7 @@ TABLES['Clientes'] = ('''
       `nome` varchar(50) NOT NULL,
       `telefone` varchar(20) NOT NULL,
       `email` varchar(70) NOT NULL,
+      `saldo` float NOT NULL,
       PRIMARY KEY (`id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
@@ -84,24 +85,6 @@ usuarios = [
       ("admin", "admin")
 ]
 cursor.executemany(usuario_sql, usuarios)
-
-cliente_sql = 'INSERT INTO clientes (nome, telefone, email) VALUES (%s, %s, %s)'
-clientes = [
-    ("LUCIAN MACIEL", "51994652141", "LUCIAN@GMAIL.COM")
-]
-cursor.executemany(cliente_sql, clientes)
-
-lancamento_sql = 'INSERT INTO lancamentos (data, valor, observacao, id_cliente) VALUES (%s, %s, %s, %s)'
-lancamentos = [
-    ("2023-03-09", "250", "Compra de relógio de pulso", "1")
-]
-cursor.executemany(lancamento_sql, lancamentos)
-
-pagamento_sql = 'INSERT INTO pagamentos (data, valor, observacao, id_cliente) VALUES (%s, %s, %s, %s)'
-pagamentos = [
-    ("2023-03-12", "150", "Pagamento via Pix", "1")
-]
-cursor.executemany(pagamento_sql, pagamentos)
 
 conn.commit()
 cursor.close()

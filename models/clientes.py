@@ -6,6 +6,7 @@ class Clientes(db.Model):
     nome = db.Column(db.String(50), nullable=False)
     telefone = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(70), nullable=False)
+    saldo = db.Column(db.Float, nullable=False)
 
 
     def __repr__(self):
@@ -14,6 +15,11 @@ class Clientes(db.Model):
     @staticmethod
     def lista_clientes():
         clientes = Clientes.query.order_by(Clientes.nome)
+        return clientes
+
+    @staticmethod
+    def lista_clientes_por_saldo():
+        clientes = Clientes.query.order_by(Clientes.saldo.desc())
         return clientes
 
     @staticmethod
@@ -28,9 +34,10 @@ class Clientes(db.Model):
         email_validado = Validador.valida_email(email)
         telefone_validado = Validador.valida_telefone(telefone)
         dados_validados = nome_validado and email_validado and telefone_validado
+        saldo = 0
 
         if(dados_validados):
-            cliente = Clientes(nome=nome.upper(), telefone=telefone, email=email.upper())
+            cliente = Clientes(nome=nome.upper(), telefone=telefone, email=email.upper(), saldo=saldo)
             db.session.add(cliente)
             db.session.commit()
             mensagem = f"Cliente {nome} foi cadastrado com sucesso!"
@@ -69,4 +76,11 @@ class Clientes(db.Model):
             except:
                 return "Não foi possível deletar. Cliente possui lançamentos vinculados!"
 
+    @staticmethod
+    def atualiza_saldo(id, valor):
+        cliente = Clientes.busca_cliente(id)
+        cliente.saldo = float(cliente.saldo) + float(valor)
+        db.session.add(cliente)
+        db.session.commit()
+        return f"Saldo alterado com sucesso!"
 
