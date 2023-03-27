@@ -1,9 +1,5 @@
-<h1>Caderninho - Gestão de pequenas cobranças</h1>
-
-<ul>
-    <li><a href="/cliente-novo">Cadastrar Cliente</a></li>
-    <li><a href="/clientes">Lista de Clientes</a></li>
-</ul>
+{% extends "template.html" %}
+{% block conteudo %}
 
 <h3>Total a receber:</h3>
 <p>{{ valores_a_receber }}</p>
@@ -26,12 +22,44 @@
         </tbody>
 </table>
 
-
-
-
-
-<h3>Clientes inadimplentes:</h3>
-
 <h3>Pagamentos realizados nos últimos 30 dias:</h3>
+<table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pagamento in ultimos_pagamentos%}
+            <tr>
+                <td>{{ pagamento.data }}</td>
+                <td>{{ pagamento.valor }}</td>
+                <td>{{ pagamento.clientes.nome }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
 
 <h3>Lançamentos realizados nos últimos 30 dias:</h3>
+<table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lancamento in ultimos_lancamentos%}
+            <tr>
+                <td>{{ lancamento.data }}</td>
+                <td>{{ lancamento.valor }}</td>
+                <td>{{ lancamento.clientes.nome }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
+{% endblock %}

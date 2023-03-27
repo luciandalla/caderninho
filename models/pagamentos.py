@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from flask_app import db
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
@@ -78,3 +80,9 @@ class Pagamentos(db.Model):
         for pagamento in pagamentos:
             total = total + pagamento.valor
         return total
+
+    @staticmethod
+    def pagamentos_ultimos_30_dias():
+        data_limite = datetime.now() - timedelta(days=30)
+        resultado = Pagamentos.query.filter(Pagamentos.data >= data_limite).order_by(Pagamentos.data.desc()).all()
+        return resultado

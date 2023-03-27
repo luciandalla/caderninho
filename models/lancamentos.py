@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from flask_app import db
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
@@ -78,3 +80,9 @@ class Lancamentos(db.Model):
         for lancamento in lancamentos:
             total = total + lancamento.valor
         return total
+
+    @staticmethod
+    def lancamentos_ultimos_30_dias():
+        data_limite = datetime.now() - timedelta(days=30)
+        resultado = Lancamentos.query.filter(Lancamentos.data >= data_limite).order_by(Lancamentos.data.desc()).all()
+        return resultado
