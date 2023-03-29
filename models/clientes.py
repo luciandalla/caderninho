@@ -37,7 +37,6 @@ class Clientes(db.Model):
         saldo = 0
 
         if(dados_validados):
-            telefone = f"({telefone[0:2]}){telefone[2:7]}-{telefone[7:]}"
             cliente = Clientes(nome=nome.upper(), telefone=telefone, email=email.upper(), saldo=saldo)
             db.session.add(cliente)
             db.session.commit()
@@ -55,7 +54,6 @@ class Clientes(db.Model):
         dados_validados = nome_validado and email_validado and telefone_validado
 
         if (dados_validados):
-            telefone = f"({telefone[0:2]}){telefone[2:7]}-{telefone[7:]}"
             cliente = Clientes.busca_cliente(id)
             cliente.nome = nome.upper()
             cliente.telefone = telefone

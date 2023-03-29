@@ -11,7 +11,9 @@ class Validador:
 
     @staticmethod
     def valida_telefone(telefone):
-        if 10 <= len(telefone) <= 11:
+        padrao_telefone = re.compile(r'\([0-9]{2}\)[0-9]{5}-[0-9]{4,5}')
+        match = padrao_telefone.match(telefone)
+        if match:
             return True
         else:
             return False
