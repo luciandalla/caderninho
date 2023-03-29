@@ -1,18 +1,25 @@
 {% extends "template.html" %}
 {% block conteudo %}
 
-<h1>Clientes cadastrados</h1>
+<h1 xmlns="http://www.w3.org/1999/html">Clientes cadastrados</h1>
 <div>
     <a class="btn btn-success main__novocliente" href="{{ url_for('cliente_novo') }}">Novo Cliente</a>
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover" id="tabela">
             <caption>Lista de clientes cadastrados</caption>
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">Nome</th>
+                    <th scope="col">Nome </th>
                     <th scope="col">Telefone</th>
                     <th scope="col">Email</th>
                     <th scope="col">Saldo Devedor</th>
                     <th scope="col">Incluir</th>
+                </tr>
+                    <tr>
+                    <th><input class="form-control pesquisa-tabela" type="text" id="txtColuna1"/></th>
+                    <th><input class="form-control pesquisa-tabela" type="text" id="txtColuna2"/></th>
+                    <th><input class="form-control pesquisa-tabela" type="text" id="txtColuna3"/></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
