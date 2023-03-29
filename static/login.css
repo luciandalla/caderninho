@@ -1,0 +1,36 @@
+body{
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.main {
+    margin: 10% 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main__apresentacao{
+    width: 615px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-family: 'Jost', sans-serif;
+}
+
+.main__apresentacao__titulo {
+    font-size: 40px;
+}
+
+.main__apresentacao__texto {
+    text-align: justify;
+    font-size: 22px;
+}
+
+.main__login {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Jost', sans-serif;
+    font-size: 20px;
+}
