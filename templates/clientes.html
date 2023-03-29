@@ -1,27 +1,32 @@
+{% extends "template.html" %}
+{% block conteudo %}
 
-<a href="{{ url_for('cliente_novo') }}">Novo Cliente</a>
-<a href="/">Voltar</a>
-
-<table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Email</th>
-                <th>Saldo Devedor</th>
-                <th>Incluir</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cliente in clientes %}
-            <tr>
-                <td><a href="{{ url_for('cliente_detalhes', id=cliente.id) }}">{{ cliente.nome }}</a></td>
-                <td>{{ cliente.telefone }}</td>
-                <td>{{ cliente.email }}</td>
-                <td>{{ cliente.saldo }}</td>
-                <td><a href="{{ url_for('lancamento_novo', id=cliente.id) }}">Lançamento</a>
-                <a href="{{ url_for('pagamento_novo', id=cliente.id) }}">Pagamento</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-</table>
+<h1>Clientes cadastrados</h1>
+<div>
+    <a class="btn btn-success main__novocliente" href="{{ url_for('cliente_novo') }}">Novo Cliente</a>
+    <table class="table table-striped table-bordered table-hover">
+            <caption>Lista de clientes cadastrados</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Saldo Devedor</th>
+                    <th scope="col">Incluir</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td><a href="{{ url_for('cliente_detalhes', id=cliente.id) }}">{{ cliente.nome }}</a></td>
+                    <td>{{ cliente.telefone }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>R$ {{ '{:,.2f}'.format(cliente.saldo|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</td>
+                    <td><a href="{{ url_for('lancamento_novo', id=cliente.id) }}">Lançamento</a> |
+                    <a href="{{ url_for('pagamento_novo', id=cliente.id) }}">Pagamento</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+</div>
+{% endblock %}

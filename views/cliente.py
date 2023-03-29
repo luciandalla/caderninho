@@ -8,8 +8,9 @@ from models.pagamentos import *
 def clientes():
     if 'usuario' not in session or session['usuario'] == None:
         return redirect(url_for('login'))
+    usuario = session['usuario']
     clientes = Clientes.lista_clientes()
-    return render_template('clientes.html', clientes = clientes)
+    return render_template('clientes.html', clientes = clientes, usuario=usuario)
 
 @app.route('/cliente-detalhes/<int:id>')
 def cliente_detalhes(id):
