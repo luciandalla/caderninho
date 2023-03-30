@@ -1,62 +1,68 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<div class="cliente">
+    <div class="cliente__informacoes">
+        <h2>{{ cliente.nome }}</h2>
+        <a href="{{ url_for('cliente_editar', id=cliente.id) }}">Editar</a>
+        <a href="{{ url_for('cliente_excluir', id=cliente.id) }}">Excluir</a>
 
-<h1>{{ cliente.nome }}</h1>
-<a href="{{ url_for('cliente_editar', id=cliente.id) }}">Editar</a>
-<a href="{{ url_for('cliente_excluir', id=cliente.id) }}">Excluir</a>
+        <p>Saldo Devedor: R$ {{  cliente.saldo }}</p>
 
-<h3>Informações de contato</h3>
-<ul>
-    <li>Telefone: {{ cliente.telefone }}</li>
-    <li>E-mail: {{ cliente.email }}</li>
-</ul>
+        <h3>Informações de contato</h3>
+        <ul>
+            <li>Telefone: {{ cliente.telefone }}</li>
+            <li>E-mail: {{ cliente.email }}</li>
+        </ul>
+    </div>
+    <div class="cliente__movimentacoes">
 
-<p>Saldo Devedor do cliente: R$ {{  cliente.saldo }}</p>
+        <h3>Lançamentos</h3>
+        <a class="btn btn-success main__novocliente" href="{{ url_for('lancamento_novo', id=cliente.id) }}">Incluir lançamento</a>
+        <table class="table table-striped table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Observação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for lancamento in lancamentos %}
+                    <tr>
+                        <td>{{ lancamento.data.strftime('%d/%m/%Y') }}</td>
+                        <td>R$ {{ '{:,.2f}'.format(lancamento.valor|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</td>
+                        <td>{{ lancamento.observacao }}</td>
+                        <td><a href="{{ url_for('lancamento_editar', id=lancamento.id) }}">Editar</a> |
+                        <a href="{{ url_for('lancamento_excluir', id=lancamento.id) }}">Excluir</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
 
-<h3>Lançamentos</h3>
-<a href="{{ url_for('lancamento_novo', id=cliente.id) }}">Incluir lançamento</a>
-<table>
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Observação</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for lancamento in lancamentos %}
-            <tr>
-                <td>{{ lancamento.data }}</td>
-                <td>{{ lancamento.valor }}</td>
-                <td>{{ lancamento.observacao }}</td>
-                <td><a href="{{ url_for('lancamento_editar', id=lancamento.id) }}">Editar</a>
-                <a href="{{ url_for('lancamento_excluir', id=lancamento.id) }}">Excluir</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-</table>
-
-<h3>Pagamentos</h3>
-<a href="{{ url_for('pagamento_novo', id=cliente.id) }}">Incluir pagamento</a>
-<table>
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Observação</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for pagamento in pagamentos %}
-            <tr>
-                <td>{{ pagamento.data }}</td>
-                <td>{{ pagamento.valor }}</td>
-                <td>{{ pagamento.observacao }}</td>
-                <td><a href="{{ url_for('pagamento_editar', id=pagamento.id) }}">Editar</a>
-                <a href="{{ url_for('pagamento_excluir', id=pagamento.id) }}">Excluir</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-</table>
-
-<a href="/clientes">Voltar</a>
+        <h3>Pagamentos</h3>
+        <a class="btn btn-danger main__novocliente" href="{{ url_for('pagamento_novo', id=cliente.id) }}">Incluir pagamento</a>
+        <table class="table table-striped table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Forma de Pagamento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for pagamento in pagamentos %}
+                    <tr>
+                        <td>{{ pagamento.data.strftime('%d/%m/%Y') }}</td>
+                        <td>R$ {{ '{:,.2f}'.format(pagamento.valor|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</td>
+                        <td>{{ pagamento.observacao }}</td>
+                        <td><a href="{{ url_for('pagamento_editar', id=pagamento.id) }}">Editar</a> |
+                        <a href="{{ url_for('pagamento_excluir', id=pagamento.id) }}">Excluir</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

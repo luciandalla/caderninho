@@ -34,7 +34,7 @@ class Pagamentos(db.Model):
 
     @staticmethod
     def cadastra_pagamento(data, valor, observacao, cliente_id):
-        pagamento = Pagamentos(data=data, valor=valor, observacao=observacao, id_cliente=cliente_id)
+        pagamento = Pagamentos(data=data, valor=valor, observacao=observacao.upper(), id_cliente=cliente_id)
         db.session.add(pagamento)
         db.session.commit()
         valor = float(valor) * -1
@@ -47,7 +47,7 @@ class Pagamentos(db.Model):
         diferenca_valor = float(pagamento.valor) - float(valor)
         pagamento.data = data
         pagamento.valor = valor
-        pagamento.observacao = observacao
+        pagamento.observacao = observacao.upper()
         pagamento.id_cliente = cliente_id
         db.session.add(pagamento)
         db.session.commit()

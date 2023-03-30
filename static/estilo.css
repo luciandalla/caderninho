@@ -9,12 +9,22 @@
     font-family: 'Jost', sans-serif;
 }
 
-.main__novocliente {
-    width: 120px;
-    height: 37px;
+.main__novocliente{
+    width: 200px;
+    height: 35px;
     margin-bottom: 10px;
 }
 
 .pesquisa-tabela{
     height: 30px;
+}
+
+.cliente {
+    margin: 5% 10%;
+    margin-top: 80px;
+    display: flex;
+    gap: 30px;
+    align-items: left;
+    justify-content: space-between;
+    font-family: 'Jost', sans-serif;
 }

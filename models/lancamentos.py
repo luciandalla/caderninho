@@ -35,7 +35,7 @@ class Lancamentos(db.Model):
 
     @staticmethod
     def cadastra_lancamento(data, valor, observacao, cliente_id):
-        lancamento = Lancamentos(data=data, valor=valor, observacao=observacao, id_cliente=cliente_id)
+        lancamento = Lancamentos(data=data, valor=valor, observacao=observacao.upper(), id_cliente=cliente_id)
         db.session.add(lancamento)
         db.session.commit()
         Clientes.atualiza_saldo(cliente_id, valor)
@@ -47,7 +47,7 @@ class Lancamentos(db.Model):
         diferenca_valor = float(valor) - float(lancamento.valor)
         lancamento.data = data
         lancamento.valor = valor
-        lancamento.observacao = observacao
+        lancamento.observacao = observacao.upper()
         lancamento.id_cliente = cliente_id
         db.session.add(lancamento)
         db.session.commit()

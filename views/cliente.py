@@ -16,10 +16,12 @@ def clientes():
 def cliente_detalhes(id):
     if 'usuario' not in session or session['usuario'] == None:
         return redirect(url_for('login'))
+    usuario = session['usuario']
     cliente = Clientes.busca_cliente(id)
     lancamentos = Lancamentos.busca_lancamentos(id)
     pagamentos = Pagamentos.busca_pagamentos(id)
-    return render_template('cliente-detalhes.html', cliente = cliente, lancamentos=lancamentos, pagamentos=pagamentos)
+    return render_template('cliente-detalhes.html', cliente = cliente, lancamentos=lancamentos,
+                           pagamentos=pagamentos, usuario=usuario)
 
 @app.route('/cliente-novo')
 def cliente_novo():
