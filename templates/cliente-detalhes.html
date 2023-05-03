@@ -3,16 +3,17 @@
 <div class="cliente">
     <div class="cliente__informacoes">
         <h2>{{ cliente.nome }}</h2>
-        <a href="{{ url_for('cliente_editar', id=cliente.id) }}">Editar</a>
-        <a href="{{ url_for('cliente_excluir', id=cliente.id) }}">Excluir</a>
 
-        <p>Saldo Devedor: R$ {{  cliente.saldo }}</p>
-
-        <h3>Informações de contato</h3>
-        <ul>
-            <li>Telefone: {{ cliente.telefone }}</li>
-            <li>E-mail: {{ cliente.email }}</li>
-        </ul>
+        <p class="cliente__informacoes__saldo">Saldo Devedor: R$ {{ '{:,.2f}'.format(cliente.saldo|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</p>
+        <div class="cliente__informacoes__contato">
+            <h3>Informações de contato</h3>
+            <ul>
+                <li>Telefone: {{ cliente.telefone }}</li>
+                <li>E-mail: {{ cliente.email }}</li>
+            </ul>
+            <a href="{{ url_for('cliente_editar', id=cliente.id) }}">Editar</a> |
+            <a href="{{ url_for('cliente_excluir', id=cliente.id) }}">Excluir</a>
+        </div>
     </div>
     <div class="cliente__movimentacoes">
 

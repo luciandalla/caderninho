@@ -1,16 +1,29 @@
 
+{% extends "template.html" %}
+{% block conteudo %}
+
+<h1>{{ cliente.nome }}</h1>
+
 <form action="{{ url_for('cliente_atualizacao') }}" method="post">
 
-    <input type="hidden" name="id" value="{{ cliente.id }}">
-    <label class="texto" for="nome">Nome: </label>
-    <input type="text" id="nome" name="nome" value="{{ cliente.nome }}">
+    <div class="form-group">
+        <input type="hidden" name="id" value="{{ cliente.id }}">
+        <label class="texto" for="nome">Nome: </label>
+        <input class="form-control" type="text" id="nome" name="nome" value="{{ cliente.nome }}">
+    </div>
 
-    <label class="texto" for="telefone">Telefone: </label>
-    <input type="text" id="telefone" name="telefone" value="{{ cliente.telefone }}">
+    <div class="form-group">
+        <label class="texto" for="telefone">Telefone: </label>
+        <input class="form-control" type="text" id="telefone" name="telefone" value="{{ cliente.telefone }}" maxlength="14" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
+    </div>
 
-    <label class="texto" for="email">E-mail: </label>
-    <input type="text" id="email" name="email" value="{{ cliente.email }}">
+    <div class="form-group">
+        <label class="texto" for="email">E-mail: </label>
+        <input class="form-control" type="text" id="email" name="email" value="{{ cliente.email }}">
+    </div>
 
-    <button type="submit">Atualizar</button>
-    <a href="/clientes">Cancelar</a>
+    <button class="btn btn-success" type="submit">Atualizar</button>
+    <a class="btn btn-danger" href="/cliente-detalhes/{{ cliente.id }}">Voltar</a>
 </form>
+
+{% endblock %}

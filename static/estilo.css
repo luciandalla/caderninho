@@ -28,3 +28,11 @@
     justify-content: space-between;
     font-family: 'Jost', sans-serif;
 }
+
+.cliente__informacoes__saldo {
+    font-size: 22px;
+}
+
+.cliente__informacoes__contato {
+    margin-top: 60px;
+}

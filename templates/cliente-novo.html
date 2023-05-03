@@ -1,15 +1,27 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<h1>Cadastro de cliente</h1>
 
 <form action="{{ url_for('cliente_cadastrar') }}" method="post">
 
-    <label class="texto" for="nome">Nome: </label>
-    <input type="text" id="nome" name="nome">
+    <div class="form-group">
+        <label class="texto" for="nome">Nome: </label>
+        <input class="form-control" type="text" id="nome" name="nome" required>
+    </div>
 
-    <label class="texto" for="telefone">Telefone: </label>
-    <input type="text" id="telefone" name="telefone">
+    <div class="form-group">
+        <label class="texto" for="telefone">Telefone: </label>
+        <input class="form-control" type="text" id="telefone" name="telefone" maxlength="14" pattern="\(\d{2}\)\s*\d{5}-\d{4}" required>
+    </div>
 
-    <label class="texto" for="email">E-mail: </label>
-    <input type="text" id="email" name="email">
+    <div class="form-group">
+        <label class="texto" for="email">E-mail: </label>
+        <input class="form-control" type="text" id="email" name="email" required>
+    </div>
 
-    <button type="submit">Cadastrar</button>
-    <a href="/clientes">Cancelar</a>
+    <button class="btn btn-success" type="submit">Cadastrar</button>
+    <a class="btn btn-danger" href="/clientes">Voltar</a>
 </form>
+
+{% endblock %}
