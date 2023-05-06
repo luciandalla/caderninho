@@ -36,3 +36,18 @@
 .cliente__informacoes__contato {
     margin-top: 60px;
 }
+
+.table-dash {
+    margin-top: -25px;
+}
+
+.total_receber {
+    display: flex;
+    gap: 20px;
+    font-size: 35px;
+    background-color: #696969;
+    color: white;
+    justify-content: center;
+    padding-top: 12px;
+    border-radius: 3px;
+}

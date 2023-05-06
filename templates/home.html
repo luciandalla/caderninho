@@ -1,12 +1,13 @@
 {% extends "template.html" %}
 {% block conteudo %}
-
-<h3>Total a receber:</h3>
-<p>{{ valores_a_receber }}</p>
+<div class="total_receber">
+    <p>Total a receber:</p>
+    <p>R$ {{ '{:,.2f}'.format(valores_a_receber|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</p>
+</div>
 
 <h3>Principais Devedores:</h3>
-<table>
-        <thead>
+<table class="table table-striped table-bordered table-hover table-dash">
+        <thead class="thead-dark">
             <tr>
                 <th>Nome</th>
                 <th>Saldo Devedor</th>
@@ -16,15 +17,15 @@
             {% for devedor in devedores%}
             <tr>
                 <td>{{ devedor.nome }}</td>
-                <td>{{ devedor.saldo }}</td>
+                <td>R$ {{ '{:,.2f}'.format(devedor.saldo|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</td>
             </tr>
             {% endfor %}
         </tbody>
 </table>
 
 <h3>Pagamentos realizados nos últimos 30 dias:</h3>
-<table>
-        <thead>
+<table class="table table-striped table-bordered table-hover table-dash">
+        <thead class="thead-dark">
             <tr>
                 <th>Data</th>
                 <th>Valor</th>
@@ -34,8 +35,8 @@
         <tbody>
             {% for pagamento in ultimos_pagamentos%}
             <tr>
-                <td>{{ pagamento.data }}</td>
-                <td>{{ pagamento.valor }}</td>
+                <td>{{ pagamento.data.strftime('%d/%m/%Y') }}</td>
+                <td>R$ {{ '{:,.2f}'.format(pagamento.valor|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</td>
                 <td>{{ pagamento.clientes.nome }}</td>
             </tr>
             {% endfor %}
@@ -43,8 +44,8 @@
 </table>
 
 <h3>Lançamentos realizados nos últimos 30 dias:</h3>
-<table>
-        <thead>
+<table class="table table-striped table-bordered table-hover table-dash">
+        <thead class="thead-dark">
             <tr>
                 <th>Data</th>
                 <th>Valor</th>
@@ -54,8 +55,8 @@
         <tbody>
             {% for lancamento in ultimos_lancamentos%}
             <tr>
-                <td>{{ lancamento.data }}</td>
-                <td>{{ lancamento.valor }}</td>
+                <td>{{ lancamento.data.strftime('%d/%m/%Y') }}</td>
+                <td>R$ {{ '{:,.2f}'.format(lancamento.valor|float) | replace('.', 'm') | replace(',', '.') | replace('m', ',') }}</td>
                 <td>{{ lancamento.clientes.nome }}</td>
             </tr>
             {% endfor %}

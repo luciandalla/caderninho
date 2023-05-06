@@ -1,3 +1,5 @@
+{% extends "template.html" %}
+{% block conteudo %}
 
 <form action="{{ url_for('pagamento_atualizacao') }}" method="post">
 
@@ -5,15 +7,23 @@
     <input type="hidden" name="id" value="{{ pagamento.id }}">
     <input type="hidden" name="cliente_id" value="{{ pagamento.id_cliente }}">
 
-    <label class="texto" for="data">Data do Pagamento: </label>
-    <input type="date" id="data" name="data" value="{{ pagamento.data }}">
+    <div class="form-group">
+        <label class="texto" for="data">Data do Pagamento: </label>
+        <input class="form-control" type="date" id="data" name="data" value="{{ pagamento.data }}">
+    </div>
 
-    <label class="texto" for="valor">Valor: </label>
-    <input type="number" step=".01" min="0.01" id="valor" name="valor" value="{{ pagamento.valor }}">
+    <div class="form-group">
+        <label class="texto" for="valor">Valor: </label>
+        <input class="form-control" type="number" step=".01" min="0.01" id="valor" name="valor" value="{{ pagamento.valor }}">
+    </div>
 
-    <label class="texto" for="observacao">Descrição: </label>
-    <input type="text" id="observacao" name="observacao" value="{{ pagamento.observacao }}">
+    <div class="form-group">
+        <label class="texto" for="observacao">Descrição: </label>
+        <input class="form-control" type="text" id="observacao" name="observacao" value="{{ pagamento.observacao }}">
+    </div>
 
-    <button type="submit">Cadastrar</button>
-    <a href="{{ url_for('cliente_detalhes', id=pagamento.id_cliente) }}">Voltar</a>
+    <button class="btn btn-success" type="submit">Cadastrar</button>
+    <a class="btn btn-danger" href="{{ url_for('cliente_detalhes', id=pagamento.id_cliente) }}">Voltar</a>
 </form>
+
+{% endblock %}

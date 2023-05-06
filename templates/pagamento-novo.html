@@ -1,18 +1,29 @@
+{% extends "template.html" %}
+{% block conteudo %}
 
 <form action="{{ url_for('pagamento_cadastrar') }}" method="post">
 
     <h3>{{ cliente.nome }}</h3>
+    <h4>Cadastrar Pagamento</h4>
     <input type="hidden" name="cliente_id" value="{{ cliente.id }}">
 
-    <label class="texto" for="data">Data do Pagamento: </label>
-    <input type="date" id="data" name="data">
+    <div class="form-group">
+        <label class="texto" for="data">Data do Pagamento: </label>
+        <input class="form-control" type="date" id="data" name="data">
+    </div>
 
-    <label class="texto" for="valor">Valor: </label>
-    <input type="number" step=".01" min="0.01" id="valor" name="valor">
+    <div class="form-group">
+        <label class="texto" for="valor">Valor: </label>
+        <input class="form-control" type="number" step=".01" min="0.01" id="valor" name="valor">
+    </div>
 
-    <label class="texto" for="observacao">Descrição: </label>
-    <input type="text" id="observacao" name="observacao">
+    <div class="form-group">
+        <label class="texto" for="observacao">Descrição: </label>
+        <input class="form-control" type="text" id="observacao" name="observacao">
+    </div>
 
-    <button type="submit">Cadastrar</button>
-    <a href="{{ url_for('cliente_detalhes', id=cliente.id) }}">Voltar</a>
+    <button class="btn btn-success" type="submit">Cadastrar</button>
+    <a class="btn btn-danger" href="{{ url_for('cliente_detalhes', id=cliente.id) }}">Voltar</a>
 </form>
+
+{% endblock %}
